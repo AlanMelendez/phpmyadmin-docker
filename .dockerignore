@@ -1,0 +1,18 @@
+# Ignorar archivos de configuración del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos y carpetas de Git
+.git
+.gitignore
+
+# Ignorar carpetas específicas del proyecto
+sessions/
+connections/
+themes/
+
+# Ignorar datos persistentes de MySQL
+data/
+
+# Ignorar archivos de configuración locales y variables de entorno
+.env

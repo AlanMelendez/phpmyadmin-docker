@@ -1,0 +1,22 @@
+# # Ignorar archivos de configuración del sistema operativo
+# .DS_Store
+# Thumbs.db
+
+# # Ignorar datos de Docker
+# docker-compose.override.yml
+# *.log
+# *.pid
+
+# # Ignorar archivos de configuración sensibles
+# .env
+
+# # Ignorar datos persistentes
+# sessions/
+# connections/
+# data/
+
+# # Ignorar temas personalizados (si son temporales)
+# themes/
+
+# # Ignorar carpetas y archivos de Git
+# .git

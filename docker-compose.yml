@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: mysql_manager_phpmyadmin
+    restart: always
+    ports:
+      - "8081:80" # Acceso desde el puerto 8080 del host
+    environment:
+      PMA_HOST: ${PMA_HOST}
+      PMA_PORT: ${PMA_PORT}
+      UPLOAD_LIMIT: ${UPLOAD_LIMIT}
+      PMA_ABSOLUTE_URI: ${PMA_ABSOLUTE_URI}
+    volumes:
+      - ./sessions:/sessions
+      - ./connections:/connections
+      - ./themes:/var/www/html/themes
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./data:/var/lib/mysql
+    ports:
+      - "3306:3306"
