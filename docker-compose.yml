@@ -6,16 +6,17 @@ services:
     container_name: mysql_manager_phpmyadmin
     restart: always
     ports:
-      - "8081:80" # Acceso desde el puerto 8080 del host
+      - "8081:80"  # Acceso desde el puerto 8081 del host
     environment:
-      PMA_HOST: ${PMA_HOST}
-      PMA_PORT: ${PMA_PORT}
+      PMA_HOST: db  # Nombre del servicio de MySQL (el contenedor 'db' en este caso)
+      PMA_PORT: 3306
       UPLOAD_LIMIT: ${UPLOAD_LIMIT}
       PMA_ABSOLUTE_URI: ${PMA_ABSOLUTE_URI}
     volumes:
-      - ./sessions:/sessions
-      - ./connections:/connections
-      - ./themes:/var/www/html/themes
+      # - ./sessions:/sessions
+      # - ./connections:/connections
+    networks:
+      - php_network  # Usamos la red personalizada
 
   db:
     image: mysql:8.0
@@ -27,6 +28,13 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      - ./data:/var/lib/mysql
+      - ./data:/var/lib/mysql  # Volumen para la persistencia de la base de datos
     ports:
       - "3306:3306"
+    networks:
+      - php_network  # Aseguramos que el contenedor de MySQL esté en la misma red
+
+# Definir una red personalizada para los contenedores
+networks:
+  php_network:
+    driver: bridge
