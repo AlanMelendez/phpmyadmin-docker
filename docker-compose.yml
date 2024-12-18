@@ -20,7 +20,7 @@ services:
       - "8081:80"  # Acceso desde el puerto 8081 del host
     environment:
       PMA_HOST: db  # Nombre del servicio de MySQL (el contenedor 'db' en este caso)
-      PMA_PORT: 3307
+      PMA_PORT: 3306  # Puerto interno del contenedor MySQL
       UPLOAD_LIMIT: ${UPLOAD_LIMIT}
       PMA_ABSOLUTE_URI: ${PMA_ABSOLUTE_URI}
     networks:
