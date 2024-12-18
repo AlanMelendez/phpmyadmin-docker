@@ -7,9 +7,6 @@ services:
     restart: always
     ports:
       - "8082:8080"  # Puerto para acceder a Adminer desde el navegador
-    volumes:
-      - ./adminer-config/adminer-custom.php:/var/www/html/adminer.php  # Archivo PHP personalizado
-      - ./adminer-config:/var/lib/adminer                # Persistencia de conexiones
     environment:
       ADMINER_DEFAULT_SERVER: db  # Conexión predeterminada al contenedor db
     networks:
