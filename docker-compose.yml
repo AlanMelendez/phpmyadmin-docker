@@ -1,6 +1,17 @@
 version: '3.9'
 
 services:
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    restart: always
+    ports:
+      - "8082:8080"  # Puerto para acceder a Adminer desde el navegador
+    environment:
+      ADMINER_DEFAULT_SERVER: db  # Conexión predeterminada al contenedor db
+    networks:
+      - php_network
+
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: mysql_manager_phpmyadmin
@@ -31,26 +42,6 @@ services:
     networks:
       - php_network  # Aseguramos que el contenedor de MySQL esté en la misma red
 
-  dbeaver:
-    image: jlesage/dbeaver:latest
-    container_name: dbeaver_gui
-    restart: always
-    ports:
-      - "8082:5800"  # Acceso desde el puerto 8082 del host (noVNC para la interfaz web)
-    volumes:
-      - ./dbeaver-config:/config:rw  # Volumen para persistir las configuraciones de DBeaver
-    environment:
-      USER_ID: 1000
-      GROUP_ID: 1000
-      TZ: America/Mexico_City  # Configuración de zona horaria
-      DISPLAY_WIDTH: 1280      # Ancho de la interfaz gráfica
-      DISPLAY_HEIGHT: 800      # Alto de la interfaz gráfica
-      # Opcional: puedes configurar una contraseña para VNC
-      # VNC_PASSWORD: mi_password_segura
-    networks:
-      - php_network  # Misma red para conectar con 'db'
-
-# Definir una red personalizada para los contenedores
 networks:
   php_network:
     driver: bridge
