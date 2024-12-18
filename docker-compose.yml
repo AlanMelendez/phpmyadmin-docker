@@ -12,9 +12,6 @@ services:
       PMA_PORT: 3306
       UPLOAD_LIMIT: ${UPLOAD_LIMIT}
       PMA_ABSOLUTE_URI: ${PMA_ABSOLUTE_URI}
-    volumes:
-      # - ./sessions:/sessions
-      # - ./connections:/connections
     networks:
       - php_network  # Usamos la red personalizada
 
